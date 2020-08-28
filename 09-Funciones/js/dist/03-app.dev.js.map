@@ -1,0 +1,1 @@
+{"version":3,"sources":["03-app.js"],"names":["alert","prompt","parseInt"],"mappings":";;AAAA;AAEAA,KAAK,CAAC,OAAD,CAAL;AACAC,MAAM,CAAC,iBAAD,CAAN;AACAC,QAAQ,CAAC,IAAD,CAAR","sourcesContent":["//Funciones nativas.\r\n\r\nalert(\"Error\");\r\nprompt(\"Cual es tu edad\");\r\nparseInt(\"20\");\r\n\r\n"],"file":"03-app.dev.js"}

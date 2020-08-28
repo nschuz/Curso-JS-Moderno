@@ -1,0 +1,1 @@
+{"version":3,"sources":["01-app.js"],"names":["bool","Boolean"],"mappings":";;AAAA,IAAIA,IAAI,GAAE,IAAIC,OAAJ,CAAY,IAAZ,CAAV,C,CACA;AACA","sourcesContent":["let bool= new Boolean(true);\r\n// si creamos un bolean y lo vemos con typeof \r\n//es un objeto ya que  el operador new crea objetos \r\n"],"file":"01-app.dev.js"}
