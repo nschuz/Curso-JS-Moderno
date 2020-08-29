@@ -1,1 +1,3 @@
-//Crear un nuevo arreglo con spread operator 
+//Eventos al dar scrolll
+
+

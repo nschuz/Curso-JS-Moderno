@@ -1,3 +1,3 @@
-//Crear un nuevo arreglo con spread operator 
+//Eventos al dar scrolll
 "use strict";
 //# sourceMappingURL=06-app.dev.js.map
