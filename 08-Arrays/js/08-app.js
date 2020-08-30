@@ -30,3 +30,24 @@ carrito.splice(1);//desde la poscion y el segundo cuantps
 
 console.log(resultado);
 
+//Event Bubling el evento se propaga dando otros resultados 
+
+const cardDiv = document.querySelector('.card');
+const infoDiv = document.querySelector('.info');
+const titulo  = document.querySelector('.titulo');
+
+// se propaga al al padre o hermanos hacia lso demas
+ cardDiv.addEventListener('click' , e =>{
+ e.stopPropagation();
+    console.log('Click en card');
+ });
+
+infoDiv.addEventListener('click' , e =>{
+    e.stopPropagation();
+    console.log('Click en  info');
+ });
+
+ titulo.addEventListener('click' , e =>{
+    e.stopPropagation();
+    console.log('Click en titulo');
+ });
