@@ -7,7 +7,7 @@ var marca = document.querySelector('#marca');
 var minimo = document.querySelector('#minimo');
 var maximo = document.querySelector('#maximo');
 var puertas = document.querySelector('#puertas');
-var trasmision = document.querySelector('#transmision');
+var transmision = document.querySelector('#transmision');
 var year = document.querySelector('#year');
 var color = document.querySelector('#color');
 var min = 2010;
@@ -17,7 +17,7 @@ var max = new Date().getFullYear();
 var datosBusqueda = {
   marca: '',
   year: '',
-  trasmision: '',
+  transmision: '',
   color: '',
   puertas: '',
   minimo: '',
@@ -25,49 +25,63 @@ var datosBusqueda = {
 }; //Eventos
 
 document.addEventListener('DOMContentLoaded', function () {
-  mostrarAutos(); //muestra los automoviles al acargar 
+  mostrarAutos(autos); //muestra los automoviles al acargar 
   //llena las opciones de años
 
   llenaSelect();
 }); //Events listener para los select de busqueda
 
 marca.addEventListener('change', function (e) {
-  datosBusqueda.marca = e.targe.value;
+  datosBusqueda.marca = e.target.value;
   filtrarAuto();
 });
 year.addEventListener('change', function (e) {
-  datosBusqueda.year = e.targe.value;
+  datosBusqueda.year = e.target.value;
+  filtrarAuto();
 });
-trasmision.addEventListener('change', function (e) {
-  datosBusqueda.trasmision = e.targe.value;
+transmision.addEventListener('change', function (e) {
+  datosBusqueda.transmision = e.target.value;
+  filtrarAuto();
 });
 color.addEventListener('change', function (e) {
-  datosBusqueda.color = e.targe.value;
+  datosBusqueda.color = e.target.value;
+  filtrarAuto();
 });
 puertas.addEventListener('change', function (e) {
-  datosBusqueda.puertas = e.targe.value;
+  datosBusqueda.puertas = e.target.value;
 });
 minimo.addEventListener('change', function (e) {
-  datosBusqueda.minimo = e.targe.value;
+  datosBusqueda.minimo = e.target.value;
+  filtrarAuto();
 });
 maximo.addEventListener('change', function (e) {
-  datosBusqueda.maximo = e.targe.value;
+  datosBusqueda.maximo = e.target.value;
+  filtrarAuto();
 }); //Funciones
 
-function mostrarAutos() {
+function mostrarAutos(autos) {
+  limpiarhtml(); //Elimina el html previo
+
   autos.forEach(function (auto) {
     var marca = auto.marca,
         modelo = auto.modelo,
         year = auto.year,
-        trasmision = auto.trasmision,
+        transmision = auto.transmision,
         color = auto.color,
         precio = auto.precio,
         puertas = auto.puertas;
     var autoHtml = document.createElement('p');
-    autoHtml.textContent = "\n        ".concat(marca, " ~ ").concat(modelo, " ~ ").concat(year, " ~ ").concat(puertas, " Puertas ~ Trasmision: ").concat(trasmision, " ~ ").concat(color, " ~ ").concat(precio, "\n        "); //lo inyectamos en el html 
+    autoHtml.textContent = "\n        ".concat(marca, " ~ ").concat(modelo, " ~ ").concat(year, " ~ ").concat(puertas, " Puertas ~ Trasmision: ").concat(transmision, " ~ ").concat(color, " ~ ").concat(precio, "\n        "); //lo inyectamos en el html 
 
     resultado.appendChild(autoHtml);
   });
+} //Limpiar  html 
+
+
+function limpiarhtml() {
+  while (resultado.firstChild) {
+    resultado.removeChild(resultado.firstChild);
+  }
 } //Gnera los años del select 
 
 
@@ -84,18 +98,98 @@ function llenaSelect() {
 function filtrarAuto() {
   //usualmnete es unarrowfunctio 
   //en este caso es una funcion de alto nivel 
-  var resultado = auto.filter(filtrarMarca);
+  var resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(filtrarPrecio).filter(filtrarMaximo).filter(colorr).filter(puertass).filter(trans); //console.log(resultado);
+
+  if (resultado.length) {
+    mostrarAutos(resultado);
+  } else {
+    noResultado();
+  }
+}
+
+function noResultado() {
+  limpiarhtml();
+  var noResultado = document.createElement('div');
+  noResultado.classList.add('alerta', 'error');
+  noResultado.textContent = "No hay resultado";
+  resultado.appendChild(noResultado);
 } //Esta es llmada funcion de alto nivel 
 
 
 function filtrarMarca(auto) {
-  var marca = datosBusqueda.marca.marca;
+  var marca = datosBusqueda.marca;
 
   if (marca) {
-    return auto.marca === datosBusqueda.marca;
+    return auto.marca === marca;
   } else {
     return auto; //regresamos el auto completo 
   } //pero si el usuario no selecciona nda regresa el automovil compleot 
+
+}
+
+function filtrarYear(auto) {
+  var year = datosBusqueda.year;
+
+  if (year) {
+    return auto.year === parseInt(year);
+  } else {
+    return auto; //regresamos el auto completo 
+  } //pero si el usuario no selecciona nda regresa el automovil compleot 
+
+}
+
+function filtrarPrecio(auto) {
+  var minimo = datosBusqueda.minimo;
+
+  if (minimo) {
+    return auto.precio >= minimo;
+  } else {
+    return auto; //regresamos el auto completo 
+  } //pero si el usuari
+
+}
+
+function filtrarMaximo(auto) {
+  var maximo = datosBusqueda.maximo;
+
+  if (maximo) {
+    return auto.precio <= maximo;
+  } else {
+    return auto; //regresamos el auto completo 
+  } //pero si el usuari
+
+}
+
+function colorr(auto) {
+  var color = datosBusqueda.color;
+
+  if (color) {
+    return auto.color === color;
+  } else {
+    return auto; //regresamos el auto completo 
+  } //pero si el usuari
+
+}
+
+function puertass(auto) {
+  var puertas = datosBusqueda.puertas;
+
+  if (puertas) {
+    return auto.puertas === puertas;
+  } else {
+    return auto; //regresamos el auto completo 
+  } //pero si el usuari
+
+}
+
+function trans(auto) {
+  var transmision = datosBusqueda.transmision;
+
+  if (transmision) {
+    return auto.transmision === transmision;
+  } else {
+    return auto; //regresamos el auto completo 
+  } //pero si el usuari
 
 }
 //# sourceMappingURL=app.dev.js.map
