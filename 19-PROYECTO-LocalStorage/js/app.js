@@ -3,6 +3,8 @@ const formulario = document.querySelector('#formulario');
 const listaTweets = document.querySelector('#lista-tweets');
 const btn = document.querySelector('#boton');
 let tweets = [];
+
+
 //Event Listeners 
 cargarEventListeners();
 
@@ -123,7 +125,7 @@ function limpiahtml (){
 function borrarTweet(id){
     console.log('Borrando'+id);
     tweets= tweets.filter(tweet => tweet.id!=id);
-    
+
     console.log(tweets);
     crearHTML();
 }
