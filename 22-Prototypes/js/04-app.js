@@ -26,6 +26,9 @@ function persona (nombre , saldo , telefono ){
 persona.prototype = Object.create(cliente.prototype);
 persona.prototype.constructor = cliente;
 
+
+//NOTA CUANDO HRDDEMOS HACERLO ANTES DE CREAR EL OBJETO
+
 //instaciamos 
 const juan = new persona('juan' , 5000 , 103023);
 console.log(juan);
