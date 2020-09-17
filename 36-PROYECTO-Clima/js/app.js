@@ -57,6 +57,8 @@ function consultarApi (ciudad , pais){
     const url =`https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
     console.log(url);
 
+    spinner();
+
     fetch(url)
     .then(respuesta=> respuesta.json())
     .then(datuos=>{
@@ -73,15 +75,32 @@ function consultarApi (ciudad , pais){
 }
 
 function mostrarClima(datos){
-    const {main:{temp , temp_max , temp_min}}=datos;
-    const centigrados= temp-273.15;
+    const {name ,main:{temp , temp_max , temp_min}}=datos;
+    const centigrados= kelvinCentigrados(temp);
+    const max= kelvinCentigrados(temp_max);
+    const min= kelvinCentigrados(temp_min);
     const actual = document.createElement('p');
     actual.innerHTML=`${centigrados} &#8451`;
     actual.classList.add('font-bold' , 'text-6xl');
 
+   const ciudad = document.createElement('p');
+   ciudad.textContent=`Clima en ${name}`;
+   ciudad.classList.add('font-bold' , 'text-6xl');
+   
+    const temMaixma = document.createElement('p');
+    temMaixma.innerHTML=`Max: ${max} &#8451`;
+    temMaixma.classList.add('text-xl');
+
+    const temMinima = document.createElement('p');
+    temMinima.innerHTML=`Min: ${min} &#8451`;
+    temMaixma.classList.add('text-xl');
+
     const resultadoDiv = document.createElement('div');
     resultadoDiv.classList.add('text-center', 'text-white');
+    resultadoDiv.appendChild(ciudad);
     resultadoDiv.appendChild(actual);
+    resultadoDiv.appendChild(temMaixma);
+    resultadoDiv.appendChild(temMinima);
     resultado.appendChild(resultadoDiv);
 
 }
@@ -90,4 +109,24 @@ function limpiarhtml (){
     while(resultado.firstChild){
         resultado.removeChild(resultado.firstChild);
     }
+}
+
+function kelvinCentigrados (grados){
+return parseInt(grados-273.15);
+}
+
+function spinner (){
+    limpiarhtml();
+    const divSpinner = document.createElement('div');
+    divSpinner.classList.add('sk-fading-cirle');
+
+    divSpinner.innerHTML=`
+    <div class="sk-fading-circle">
+  <div class="sk-circle1 sk-circle"></div>
+  <div class="sk-circle2 sk-circle"></div>
+  <div class="sk-circle3 sk-circle"></div>
+  <div class="sk-circle4 sk-circle"></div>
+    `;
+
+    resultado.appendChild(divSpinner);
 }
