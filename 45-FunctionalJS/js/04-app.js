@@ -8,3 +8,17 @@ const carrito = [
     { nombre: 'Bocinas', precio: 300},
     { nombre: 'Laptop', precio: 800},
 ];
+
+const resultado = carrito.filter(producto => {
+//recibe una funcion como argumento 
+return producto.precio>400;
+});
+console.log(resultado);
+//Otra forma  es lo  mismo
+
+//esto esuna funcion
+const mayor400= producto =>{
+    return producto.precio>400;
+}
+const resultado = carrito.filter(mayor400);
+console.log(resultado);

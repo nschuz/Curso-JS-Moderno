@@ -8,3 +8,13 @@ const carrito = [
     { nombre: 'Bocinas', precio: 300},
     { nombre: 'Laptop', precio: 800},
 ];
+
+
+//La diferencia entre foreach y .map es que uno crea un nuevo arreglo y el otro solo itera(foreach)
+
+const  obtenerNombres = producto=>{
+return producto.nombre;
+}
+
+const resultado = carrito.map(obtenerNombres);
+console.log(resultado)
