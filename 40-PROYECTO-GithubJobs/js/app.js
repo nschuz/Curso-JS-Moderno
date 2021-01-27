@@ -13,6 +13,7 @@ function validaBusqueda (e){
         mostrarMensaje('Busqueda muy corta .... Añade más informacíon');
         return; //para que no s ejecue el codigo 
     }
+    //validacion
 
 
     consultaAPI(busqueda);

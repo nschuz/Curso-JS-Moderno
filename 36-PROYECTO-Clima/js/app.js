@@ -20,7 +20,7 @@ function buscarClima (e){
         return;
     }
 
-
+  
 
     //consultar api 
     consultarApi (ciudad , pais);
